@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AssociateCustomerDashboard
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
@@ -25,3 +26,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+=======
+# associate-customer
+customer application in angular 6 with Material  themes
+>>>>>>> 96c40cea7a10a2c19cd9132f1e7e6d6ea0b553fe
