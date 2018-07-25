@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl , FormGroup, Validators ,FormsModule,NgForm, ReactiveFormsModule } from '@angular/forms';  
+import {CustomerService } from './../service/customer.service';
+import { Customer } from './../model/customer.model';
 
 @Component({
     selector: 'app-add-user',
@@ -18,8 +20,8 @@ export class AddUserComponent {
     Email:string='';  
     IsAccepted:number=0;
 
-    constructor(private fb: FormBuilder) {  
-        this.createForm(); 
+    constructor(private fb: FormBuilder,private customerService : CustomerService) {  
+          this.createForm(); 
         }
     
       createForm(){
@@ -46,7 +48,8 @@ export class AddUserComponent {
   
   // Executed When Form Is Submitted  
   onFormSubmit(form:NgForm)  {  
-    console.log(form);  
+    console.log(form); 
+    this.customerService.post(this.regiForm.value).subscribe();
   }  
   
 }   

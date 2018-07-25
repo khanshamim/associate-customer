@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
@@ -16,6 +17,10 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
 import { CustomerLoginComponent } from './customer-login/customer-login.component';
 
 import { AddUserComponent } from './add-user/add-user.component';
+import { ListUserComponent } from './list-user/list-user.component';
+
+import { CustomerService } from './service/customer.service';
+import { AuthService } from './service/auth.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,8 @@ import { AddUserComponent } from './add-user/add-user.component';
     AssociateNavComponent,
     CustomerDetailsComponent,
     CustomerLoginComponent,
-    AddUserComponent
+    AddUserComponent,
+    ListUserComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +39,10 @@ import { AddUserComponent } from './add-user/add-user.component';
     ReactiveFormsModule,
     CustomMaterialModule,
     AppRoutingModule,
+    HttpClientModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })  
   ],
-  providers: [],
+  providers: [CustomerService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
