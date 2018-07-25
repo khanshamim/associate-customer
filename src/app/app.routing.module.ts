@@ -4,6 +4,7 @@ import { CustomerLoginComponent } from "src/app/customer-login/customer-login.co
 import { CustomerDashboardComponent } from "src/app/customer-dashboard/customer-dashboard.component";
 import { AddUserComponent } from "src/app/add-user/add-user.component";
 import { ListUserComponent } from "src/app/list-user/list-user.component";
+import { ProductsComponent } from "src/app/products/products.component";
 
 
 const routes: Routes = [
@@ -12,6 +13,8 @@ const routes: Routes = [
     {path: 'add', component: AddUserComponent},
     {path: 'edit', component: CustomerDashboardComponent},
     {path: 'list', component: ListUserComponent},
+    {path: 'products', component: ProductsComponent},
+    {path: 'customers', component: ListUserComponent},
     {path: '', component: CustomerLoginComponent}
 ];
 

@@ -1,6 +1,3 @@
-<div *ngIf="customers | async as customer; else loading">
-        FirstName: {{customer.FirstName}}, LastName: {{customer.LastName}}
-</div>
-<ng-template #loading>
-    <img src="assets/images/loading.gif">
-</ng-template> 
+<mat-list role="list">
+            <mat-list-item   role="listitem" *ngFor="let customer of Customers | async">{{customer.FirstName}}</mat-list-item>
+</mat-list>

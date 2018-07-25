@@ -1,9 +1,30 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<!--app-associate-nav></app-associate-nav-->
-<!--app-customer-dashboard></app-customer-dashboard-->
-<mat-toolbar color="accent">    
-        <span>shamim Khan - C#Corner</span>    
-        <span class="demo-toolbar"></span>    
-        <button mat-button href="#">Go To My Blog</button>            
-</mat-toolbar> 
-<router-outlet></router-outlet>
+<mat-drawer-container  class="sidenav-container mat-drawer-container mat-sidenav-container mat-drawer-transition all-wrap" autosize role="main">
+        <mat-drawer #drawer class="sidenav mat-drawer mat-sidenav mat-drawer-side " mode="side">
+                 <mat-list>
+                        <mat-list-item [routerLink]="['/products']"> Show Products</mat-list-item>
+                        <mat-list-item [routerLink]="['/customers']"> Show Customers</mat-list-item>
+                </mat-list>
+        </mat-drawer>
+        
+        <div class="page-wrap">
+                <header role="banner">
+                <mat-toolbar color="primary">
+                <button
+                type="button"
+                mat-icon-button
+                (click)="drawer.toggle()"
+                title="Open sidenav">
+                <mat-icon>menu</mat-icon>
+                </button>
+                Your Toolbar
+                </mat-toolbar>
+                </header>
+                <main class="content mat-drawer-content mat-sidenav-content">
+                        <router-outlet></router-outlet>
+                        <ng4-loading-spinner> </ng4-loading-spinner>
+                </main>
+                <footer>
+                Your sticky footer with a variable height.
+                </footer>
+        </div>
+</mat-drawer-container>        

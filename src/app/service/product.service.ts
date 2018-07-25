@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'; 
-import { Customer } from './../model/customer.model';
+import { Product } from './../model/product.model';
 import { MatSnackBar } from '@angular/material';
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable()
-export class CustomerService {
+export class ProductService {
 
     ACCESS_KEY: 'http://localhost:3000/api/';
 
     constructor(private http: HttpClient,private sb: MatSnackBar, private auth: AuthService){ }
 
-    get() : Observable<Customer[]>{
-        return this.http.get<Customer[]>('http://localhost:3000/api/product').pipe(
+    get() : Observable<Product[]>{
+        return this.http.get<Product[]>('http://localhost:3000/api/product').pipe(
             retry(3), // retry a failed request up to 3 times
             catchError(this.handleError)
         );   
     }
 
-    post(customerData: Customer) : Observable<Customer>{
+    post(productList: Product) : Observable<Product>{
         
-        return this.http.post<Customer>(this.ACCESS_KEY + 'customer',customerData).pipe(
+        return this.http.post<Product>(this.ACCESS_KEY + 'customer',productList).pipe(
             catchError(this.handleError)
           );
     }

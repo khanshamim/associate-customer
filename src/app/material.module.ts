@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatGridListModule, MatCardModule,MatInputModule, MatMenuModule, MatIconModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatDatepickerModule,MatNativeDateModule, MatRadioModule, MatSelectModule, MatSliderModule, MatSlideToggleModule } from '@angular/material';
+import { MatGridListModule, MatCardModule,MatInputModule, MatMenuModule, MatIconModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatDatepickerModule,MatNativeDateModule, MatRadioModule, MatSelectModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatCheckboxModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
@@ -26,7 +26,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
         MatRadioModule,
         MatSelectModule,
         MatSliderModule, 
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        MatCheckboxModule
     ],
     exports:[MatGridListModule,
     MatCardModule,
@@ -48,7 +50,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatRadioModule,
     MatSelectModule,
     MatSliderModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatCheckboxModule
 ]
 })
 export class CustomMaterialModule { }
