@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'; 
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http'; 
 import { Product } from './../model/product.model';
 import { MatSnackBar } from '@angular/material';
 import { Observable, throwError } from "rxjs";
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry, map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable()
@@ -18,6 +18,26 @@ export class ProductService {
             retry(3), // retry a failed request up to 3 times
             catchError(this.handleError)
         );   
+    }
+
+    getById(productId: number) : Observable<Product>{
+        return this.http.get<Product>(`http://localhost:3000/api/product/${productId}`);
+    }
+
+    getProduct(productId: number, filter = '', sortOrder = 'asc',
+    pageNumber = 0, pageSize = 3) : Observable<Product[]>{
+        return this.http.get<Product[]>('http://localhost:3000/api/product',{
+            params: new HttpParams()
+                .set('productId', productId.toString())
+                .set('filter', filter)
+                .set('sortOrder', sortOrder)
+                .set('pageNumber', pageNumber.toString())
+                .set('pageSize', pageSize.toString())
+            }).pipe(
+                map(res =>  res["payload"]),
+                retry(3),
+                catchError(this.handleError)
+            );   
     }
 
     post(productList: Product) : Observable<Product>{
