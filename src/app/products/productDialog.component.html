@@ -1,0 +1,76 @@
+
+
+<h2 mat-dialog-title >Edit Product</h2>
+
+<mat-dialog-content [formGroup]="form">
+    
+    <mat-form-field>
+
+        <input matInput
+                placeholder="product name" formControlName="name">
+
+    </mat-form-field>
+    <mat-error>  
+        <span *ngIf="!form.get('name').valid && form.get('name').touched">Please enter product Name</span>  
+    </mat-error> 
+
+
+    <mat-form-field>
+
+        <input matInput
+                placeholder="Price"
+               formControlName="price">
+
+    </mat-form-field>
+    <mat-error>  
+        <span *ngIf="!form.get('price').valid && form.get('price').touched">Please enter price</span>  
+    </mat-error> 
+
+
+    <mat-form-field>
+
+        <input matInput
+                placeholder="photo"
+               formControlName="photo">
+
+    </mat-form-field>
+    <mat-error>  
+        <span *ngIf="!form.get('photo').valid && form.get('photo').touched">Please upload photo</span>  
+    </mat-error> 
+
+    <mat-slide-toggle formControlName="instock">In Stock</mat-slide-toggle>
+    
+
+    <mat-form-field>
+
+        <input matInput [matDatepicker]="myDatepicker"
+            formControlName="created_date">
+
+        <mat-datepicker-toggle matSuffix
+                               [for]="myDatepicker">
+
+        </mat-datepicker-toggle>
+
+        <mat-datepicker #myDatepicker></mat-datepicker>
+
+    </mat-form-field>
+    <mat-error>  
+        <span *ngIf="!form.get('created_date').valid && form.get('created_date').touched">Please select any Date !!!</span>  
+    </mat-error>  
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+    <button class="mat-raised-button"
+            (click)="close()">
+        Close
+    </button>
+
+    <button class="mat-raised-button mat-primary"
+            (click)="save()"
+            [disabled]="!form.valid">
+        Save
+    </button>
+
+</mat-dialog-actions>

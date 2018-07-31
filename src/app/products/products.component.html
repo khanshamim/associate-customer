@@ -31,6 +31,6 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
     </mat-table>
-    <mat-paginator [length]="product?.lessonsCount" [pageSize]="3"
+    <mat-paginator [length]="product?.lessonsCount"  [pageSize]="3"
                    [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
 </div>

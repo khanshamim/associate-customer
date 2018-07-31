@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef  } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, ViewEncapsulation,Input  } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import { ProductService } from './../service/product.service';
 import { ProductDataSource } from "./../service/product.datasource";
@@ -6,8 +6,11 @@ import { Observable, fromEvent, merge } from 'rxjs';
 import {debounceTime, distinctUntilChanged, startWith, tap, delay} from 'rxjs/operators';
 import { DataSource, CollectionViewer } from '@angular/cdk/collections';
 import { Product } from "./../model/product.model";
-import { MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator, MatSort, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { ProductDialogComponent } from './productDialog.component';
+
+
 
 @Component({
     selector : 'app-products',
@@ -18,6 +21,8 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 export class ProductsComponent implements OnInit, AfterViewInit {
 
    // products : Observable<Product[]>;
+   @Input()
+
    product: Product;
   
    dataSource : ProductDataSource;
@@ -31,7 +36,12 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   @ViewChild('input') input: ElementRef;  
 
-   constructor(private productService : ProductService,private route: ActivatedRoute, private spinnerService: Ng4LoadingSpinnerService){ }
+   constructor(
+       private productService : ProductService,
+       private route: ActivatedRoute, 
+       private spinnerService: Ng4LoadingSpinnerService, 
+       private dialog: MatDialog       
+    ){ }
 
     ngOnInit() {
       //  this.getProducts(); 
@@ -39,7 +49,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
       this.dataSource = new ProductDataSource(this.productService);     
 
-      this.dataSource.loadLessons(1,'','asc',0,3);
+      this.dataSource.loadProducts(1,'','asc',0,3);
     }
 
     ngAfterViewInit() {
@@ -53,22 +63,22 @@ export class ProductsComponent implements OnInit, AfterViewInit {
                 tap(() => {
                     this.paginator.pageIndex = 0;
 
-                    this.loadLessonsPage();
+                    this.loadProductsPage();
                 })
             )
             .subscribe();
 
         merge(this.sort.sortChange, this.paginator.page)
         .pipe(
-            tap(() => this.loadLessonsPage())
+            tap(() => this.loadProductsPage())
         )
         .subscribe();
 
     }
 
 
-    loadLessonsPage() {
-        this.dataSource.loadLessons(
+    loadProductsPage() {
+        this.dataSource.loadProducts(
             //this.product.id,
             1,
             this.input.nativeElement.value,
@@ -83,25 +93,27 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
       onRowClicked(row) {
         console.log('Row clicked: ', row);
+        this.openDialog(row);
       }
+
+      openDialog( {
+             id,name, description, price, instock, photo, created_date}:Product) {
+
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+            id,name, description, price, instock, photo, created_date
+        };
+
+        const dialogRef = this.dialog.open(ProductDialogComponent,
+            dialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            data => console.log("Dialog output:", data)
+        );    
+    }
     
 
 }
-
-/*export class ProductDataSource extends DataSource<Product> {
-
-    constructor(private productService : ProductService) {
-      super();
-    }
-
-    connect(collectionViewer: CollectionViewer): Observable<Product[]> {
-      return this.productService.get();
-    }
-
-    disconnect(collectionViewer: CollectionViewer) : void {}
-
-    loadProducts(productId: number, filter: string,
-        sortDirection: string, pageIndex: number, pageSize: number) {
-        //...
-    }  
-}*/

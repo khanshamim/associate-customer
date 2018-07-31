@@ -23,6 +23,7 @@ import { CustomerLoginComponent } from './customer-login/customer-login.componen
 import { AddUserComponent } from './add-user/add-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { ProductsComponent } from './products/products.component';
+import {ProductDialogComponent} from './products/productDialog.component';
 
 import { CustomerService } from './service/customer.service';
 import { ProductService } from './service/product.service';
@@ -40,7 +41,8 @@ import { AuthService } from './service/auth.service';
     CustomerLoginComponent,
     AddUserComponent,
     ListUserComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,7 @@ import { AuthService } from './service/auth.service';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })  
   ],
   providers: [CustomerService,ProductService,AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[ProductDialogComponent]
 })
 export class AppModule { }
